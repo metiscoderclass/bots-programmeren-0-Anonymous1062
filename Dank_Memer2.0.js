@@ -1,6 +1,6 @@
-memeArray = ["http://anonymous1062.github.io/memes/EFW323.jpeg", "http://anonymous1062.github.io/memes/ewFW.jpeg", "http://anonymous1062.github.io/memes/Anime.png", "http://anonymous1062.github.io/memes/_oEVaLAz5IvphKxZmSfcYNjmMaV85ZxBGF5BlO7JFv4.png", "https://i.redd.it/36s0aafny9a11.png", "http://anonymous1062.github.io/memes/f9a.jpg", "http://anonymous1062.github.io/memes/fwE.jpeg", "http://anonymous1062.github.io/memes/hytrdset.jpeg", "http://anonymous1062.github.io/memes/Kamino doesn't exist.png", "http://anonymous1062.github.io/memes/Naamloos.png", "http://anonymous1062.github.io/memes/Precision is not accuracy.png", "http://anonymous1062.github.io/memes/sewesw.jpeg", "http://anonymous1062.github.io/memes/ss.jpeg", "http://anonymous1062.github.io/memes/Wants-To-Round-Up-A-Group-Of-People-And-Build-A-Giant-Wall-Funny-Donald-Trump-Meme-Image.jpg", "http://anonymous1062.github.io/memes/wefaw.jpeg", "http://anonymous1062.github.io/memes/weferwrwe.jpeg", "http://anonymous1062.github.io/memes/wq3rr.jpeg", "http://anonymous1062.github.io/memes/WhatsApp Image 2018-10-11 at 15.09.03.jpeg"]
+memeArray = ["memes/EFW323.jpeg", "memes/ewFW.jpeg", "memes/Anime.png", "memes/_oEVaLAz5IvphKxZmSfcYNjmMaV85ZxBGF5BlO7JFv4.png", "https://i.redd.it/36s0aafny9a11.png", "memes/f9a.jpg", "memes/fwE.jpeg", "hytrdset.jpeg", "memes/Kamino doesn't exist.png", "memes/Naamloos.png", "memes/Precision is not accuracy.png", "memes/sewesw.jpeg", "memes/ss.jpeg", "memes/Wants-To-Round-Up-A-Group-Of-People-And-Build-A-Giant-Wall-Funny-Donald-Trump-Meme-Image.jpg", "memes/wefaw.jpeg", "memes/weferwrwe.jpeg", "memes/wq3rr.jpeg", "memes/WhatsApp Image 2018-10-11 at 15.09.03.jpeg"]
 var randomMeme = memeArray[Math.floor(Math.random() * memeArray.length)];
-var prequelmeme = prequelArray[Math.floor(Math.random() * prequelArray.length)];
+//var prequelmeme = prequelArray[Math.floor(Math.random() * prequelArray.length)];
 
 const TeleBot = require('telebot');
 
@@ -16,16 +16,19 @@ bot.on(/^pls meme/i, (msg) => {
   randomMeme = memeArray[Math.floor(Math.random() * memeArray.length)];
     return bot.sendPhoto(msg.chat.id, randomMeme);
 });
-bot.on(/^pls prequel/i, (msg) => {
-  console.log(msg.from.id + " did something that is illegal because of Article 13")
-  prequelmeme = prequelArray[Math.floor(Math.random() * prequelArray.length)];
-    return bot.sendPhoto(msg.chat.id, prequelmeme);
-});
+//bot.on(/^pls prequel/i, (msg) => {
+//  console.log(msg.from.id + " did something that is illegal because of Article 13")
+//  prequelmeme = prequelArray[Math.floor(Math.random() * prequelArray.length)];
+//    return bot.sendPhoto(msg.chat.id, prequelmeme);
+//});
 bot.on(/hello there/i, (msg) => {
   return bot.sendMessage(msg.chat.id, "General Kenobi");
 });
 bot.start();
-
+bot.on("/quiz", (msg) => {
+  return bot.sendMessage(msg.chat.id, "General Kenobi");
+});
+bot.start();
 
 
 
