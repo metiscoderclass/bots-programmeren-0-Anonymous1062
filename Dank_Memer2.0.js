@@ -3,11 +3,11 @@ prequelArray = ["files/pokemon.jpeg", "files/lesboek.png", "files/Roses are red.
 var randomMeme = memeArray[Math.floor(Math.random() * memeArray.length)];
 var prequelmeme = prequelArray[Math.floor(Math.random() * prequelArray.length)];
 var quiz = 0;
+var aantal = 0;
+var starwars = 0;
+vragen = [{ vraag: "What is the name of ...?", antw: "..."}, { vraag: "Complete the sentence: ...", antw: ".."}, { vraag: "Which color does ... have?", antw: "..."}]
 
-//vragen = [{ vraag: "hoi", antw: "doei"},{ vraag: "hoi", antw: "doei"}, { vraag: "hoi", antw: "doei"}]
-
-//opgave = vragen[0];
-//opgave.vraag;
+opgave = vragen[aantal];
 
 //vraagAntw = { vraag: "hoi", antw: "doei"}
 //vraagAntw.vraag
@@ -17,21 +17,26 @@ function newgame() {
     clearInterval(timer1);
     bot.on(/^star wars/i, (msg) => {
       console.log(msg.from.first_name + " started a quiz");
-      return bot.sendMessage(msg.chat.id, "Started the Star Wars Quiz"), bot.sendMessage(msg.chat.id, "Question 1?");
-      answer1 = true;
+      quiz = false;
+      starwars = true;
+      bot.sendMessage(msg.chat.id, "Started the Star Wars Quiz");
+      return bot.sendMessage(msg.chat.id, opgave.vraag);
     });
   }
-}
+} //lesbrief 3 en werkt niet
 function question1() {
-  if (answer1 == true) {
-    clearInterval(timer2);
-    bot.on(/something/i, (msg) => {
-      console.log(msg.from.first_name + " has " +  + " points");
-      return bot.sendMessage(msg.chat.id, msg.from.first_name + " has " +  + " points");
-      answer2 = true;
+  if (starwars == true) {
+    bot.on(/\/answer (.*)/, (msg, props) => {
+      const text = props.match[0];
+      console.log(text)
+      if (text = opgave.antw) {
+        console.log(msg.from.first_name + " has " + "f" + " points");
+        aantal = aantal + 1;
+        return bot.sendMessage(msg.chat.id, msg.from.first_name + " has " + "f" + " points");
+      };
     });
-  }
-}
+  };
+};
 
 const TeleBot = require('telebot');
 
@@ -91,5 +96,5 @@ bot.on(/^pls song/i, (msg) => {
 });
 
 var timer1 = setInterval(newgame, 1000);
-var timer2 = setInterval(question1, 1000);
+
 bot.start();
