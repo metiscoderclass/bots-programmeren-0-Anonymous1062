@@ -1,13 +1,18 @@
+const TeleBot = require('telebot');
+
+const bot = new TeleBot({
+    token: '607347702:AAFz1UiqPLLFUs5z0HMT7jVklLLpKVwX44E' // Telegram Bot API token.
+});
+
 memeArray = ["files/shrek.jpeg", "files/Anime.png", "https://i.redd.it/36s0aafny9a11.png", "files/f9a.jpg", "files/Hitler.jpeg", "files/Donald Trump.jpg", "files/EArth.jpeg", "files/HP.jpeg"]
 prequelArray = ["files/pokemon.jpeg", "files/lesboek.png", "files/Roses are red.jpeg", "files/Jesus.jpeg", "files/Kamino doesn't exist.png", "files/didju.png", "files/Precision is not accuracy.png", "files/Anakin game.jpeg", "files/Didju.jpeg", "files/We are the senate.png"]
 var randomMeme = memeArray[Math.floor(Math.random() * memeArray.length)];
 var prequelmeme = prequelArray[Math.floor(Math.random() * prequelArray.length)];
 var quiz = 0;
 var aantal = 0;
-var starwars = 0;
-vragen = [{ vraag: "What is the name of ...?", antw: "..."}, { vraag: "Complete the sentence: ...", antw: ".."}, { vraag: "Which color does ... have?", antw: "..."}]
+var vragen = [{ vraag: "What is the name of ...?", antw: "..."}, { vraag: "Complete the sentence: Another happy", antw: "landing"}, { vraag: "Which color does ... have?", antw: "..."}]
 
-opgave = vragen[aantal];
+var opgave = vragen[aantal];
 
 //vraagAntw = { vraag: "hoi", antw: "doei"}
 //vraagAntw.vraag
@@ -16,44 +21,69 @@ function newgame() {
   if (quiz == true) {
     clearInterval(timer1);
     bot.on(/^star wars/i, (msg) => {
-      console.log(msg.from.first_name + " started a quiz");
-      quiz = false;
-      starwars = true;
-      bot.sendMessage(msg.chat.id, "Started the Star Wars Quiz");
+      console.log(msg.from.first_name + " started SW quiz");
       return bot.sendMessage(msg.chat.id, opgave.vraag);
     });
   }
-} //lesbrief 3 en werkt niet
-function question1() {
-  if (starwars == true) {
-    bot.on(/\/answer (.*)/, (msg, props) => {
-      const text = props.match[0];
-      console.log(text)
-      if (text = opgave.antw) {
-        console.log(msg.from.first_name + " has " + "f" + " points");
-        aantal = aantal + 1;
-        return bot.sendMessage(msg.chat.id, msg.from.first_name + " has " + "f" + " points");
-      };
-    });
-  };
-};
+}
 
-const TeleBot = require('telebot');
+bot.on(/(.*)/, (msg, props) => {
+  if (quiz == true){
+    console.log(msg.text)
+    message = msg.text;
+    if (message.toLowerCase() == "/a " + opgave.antw){
+      console.log(msg.from.first_name + " gave the right answer");
+      aantal += 1;
+      opgave = vragen[aantal];
+      return bot.sendMessage(msg.chat.id, "Well done, " + msg.from.first_name + " now has " + "<punten>" + " points"), bot.sendMessage(msg.chat.id, opgave.vraag);
+    }
+  }
+})
 
-const bot = new TeleBot({
-    token: '607347702:AAFz1UiqPLLFUs5z0HMT7jVklLLpKVwX44E' // Telegram Bot API token.
-});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 bot.on('/start', function (msg) {
   console.log(msg.from.first_name + " started the bot");
   return bot.sendDocument(msg.chat.id, "https://media.giphy.com/media/Nx0rz3jtxtEre/giphy.gif");
 });
 bot.on('/help', function (msg) {
   console.log(msg.from.first_name + " asked for assistance from the Jedi Council");
-  return bot.sendMessage(msg.chat.id, "Commands: meme, prequel, logo, song, info, sith and news. My prefix is pls.");
+  return bot.sendMessage(msg.chat.id, "Commands: meme, prequel, logo, song, info, sith, jedi, quiz and news. My prefix is pls.");
 });
 bot.on(/^pls help/i, function (msg) {
   console.log(msg.from.first_name + " asked for assistance from the Jedi Council");
-  return bot.sendMessage(msg.chat.id, "Commands: meme, prequel, logo, song, info, sith and news. My prefix is pls.");
+  return bot.sendMessage(msg.chat.id, "Commands: meme, prequel, logo, song, info, sith, jedi, quiz and news. My prefix is pls.");
 });
 bot.on(/^pls info/i, function (msg) {
   console.log(msg.from.first_name + " got some info");
