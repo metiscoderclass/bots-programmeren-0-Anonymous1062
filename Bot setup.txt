@@ -1,1 +1,0 @@
-node C:\Users\Gebruiker\Desktop\Schooldingen\Coderclass\Bot\Dank_Memer2.0.js

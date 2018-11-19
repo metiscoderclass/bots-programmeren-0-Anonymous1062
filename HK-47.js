@@ -4,18 +4,23 @@ const bot = new TeleBot({
     token: '607347702:AAFz1UiqPLLFUs5z0HMT7jVklLLpKVwX44E' // Telegram Bot API token.
 });
 
-memeArray = ["files/shrek.jpeg", "files/Anime.png", "https://i.redd.it/36s0aafny9a11.png", "files/f9a.jpg", "files/Hitler.jpeg", "files/Donald Trump.jpg", "files/EArth.jpeg", "files/HP.jpeg"]
-prequelArray = ["files/pokemon.jpeg", "files/lesboek.png", "files/Roses are red.jpeg", "files/Jesus.jpeg", "files/Kamino doesn't exist.png", "files/didju.png", "files/Precision is not accuracy.png", "files/Anakin game.jpeg", "files/Didju.jpeg", "files/We are the senate.png"]
+var memeArray = ["files/shrek.jpeg", "files/Anime.png", "https://i.redd.it/36s0aafny9a11.png", "files/f9a.jpg", "files/Hitler.jpeg", "files/Donald Trump.jpg", "files/EArth.jpeg", "files/HP.jpeg"]
+var prequelArray = ["files/pokemon.jpeg", "files/lesboek.png", "files/Roses are red.jpeg", "files/Jesus.jpeg", "files/Kamino doesn't exist.png", "files/didju.png", "files/Precision is not accuracy.png", "files/Anakin game.jpeg", "files/Didju.jpeg", "files/We are the senate.png"]
 var randomMeme = memeArray[Math.floor(Math.random() * memeArray.length)];
 var prequelmeme = prequelArray[Math.floor(Math.random() * prequelArray.length)];
 var quiz = 0;
 var aantal = 0;
-var vragen = [{ vraag: "What is the name of ...?", antw: "..."}, { vraag: "Complete the sentence: Another happy", antw: "landing"}, { vraag: "Which color does ... have?", antw: "..."}]
+var vragen = [{ vraag: "What does Obi-Wan say when jumping down behind Grievous?", antw: "hello there"}, { vraag: "Complete the sentence: Another happy", antw: "landing"}, { vraag: "What is the color of Mace Windu's lightsaber?", antw: "purple"}, { vraag: "What is the main character of the game Knights of the Old Republic(KOTOR)?", antw: "revan"}, { vraag: "What class of droid is HK-47?", antw: "assassin droid"}, { vraag: "What does Obi-Wan get to defeat Anakin/Darth Vader?", antw: "the high ground"}, { vraag: "What rank does Rex have?", antw: "captain"}, { vraag: "Who was the leader of the trade federation?", antw: "nute gunray"}, { vraag: "What is the name of Anakin's apprentice?", antw: "ahsoka tano"}, { vraag: "who was Palpatine's Sith Master?", antw: "darth plagueis"}, { vraag: "Where were the Clone troopers created?", antw: "kamino"}, { vraag: "What was the species of Darth Maul?", antw: "zabrak"}, { vraag: "The Sith Code: Peace is a lie, there is only...", antw: "passion"}, { vraag: "The Jedi Code: There is no emotion, there is...", antw: "peace"}, { vraag: "Who rules the Sith Empire when KOTOR starts?", antw: "darth malak"}]
+
+var players = [{speler: "586275943", punten: "0"}, {speler: "586475943", punten: "0"}, {speler: "586275443", punten: "0"}]
 
 var opgave = vragen[aantal];
 
-//vraagAntw = { vraag: "hoi", antw: "doei"}
-//vraagAntw.vraag
+//
+// {
+//   speler: id,
+//   score: getal
+// }
 
 function newgame() {
   if (quiz == true) {
@@ -28,15 +33,22 @@ function newgame() {
 }
 
 bot.on(/(.*)/, (msg, props) => {
+  console.log(msg.chat.title + ": " + msg.from.first_name + " says: " + msg.text);
+  message = msg.text;
   if (quiz == true){
-    console.log(msg.text)
-    message = msg.text;
-    if (message.toLowerCase() == "/a " + opgave.antw){
+    if (message.toLowerCase() == opgave.antw){
       console.log(msg.from.first_name + " gave the right answer");
       aantal += 1;
       opgave = vragen[aantal];
+      if (msg.from.id in players.speler) {
+        console.log("yes")
+      }
       return bot.sendMessage(msg.chat.id, "Well done, " + msg.from.first_name + " now has " + "<punten>" + " points"), bot.sendMessage(msg.chat.id, opgave.vraag);
     }
+  }
+  else if (message.toLowerCase() == "hello there"){
+    console.log(msg.from.first_name + " engaged General Grievous");
+    return bot.sendMessage(msg.chat.id, "General Kenobi");
   }
 })
 
@@ -99,18 +111,14 @@ bot.on(/^pls prequel/i, (msg) => {
   prequelmeme = prequelArray[Math.floor(Math.random() * prequelArray.length)];
   return bot.sendPhoto(msg.chat.id, prequelmeme);
 });
-bot.on(/hello there/i, (msg) => {
-  console.log(msg.from.first_name + " engaged General Grievous");
-  return bot.sendMessage(msg.chat.id, "General Kenobi");
-});
 bot.on(/^pls logo/i, (msg) => {
   console.log(msg.from.first_name + " saw EA's true nature");
   return bot.sendDocument(msg.chat.id, "files/EA.mp4");
 });
 bot.on(/^pls quiz/i, (msg) => {
-  console.log(msg.from.first_name + " somehow found this commmand");
   quiz = true;
-  return bot.sendMessage(msg.chat.id, "Started the quiz, choose question list");
+  bot.sendMessage(msg.chat.id, "Choose a question list, options: Star Wars")
+  return bot.sendMessage(msg.chat.id, "WARNING: some of the question lists can contain spoilers for movies, games, TV-shows or books");
 });
 bot.on(/^pls sith/i, (msg) => {
   console.log(msg.from.first_name + " is following the Code of the Sith");
@@ -123,6 +131,10 @@ bot.on(/^pls news/i, (msg) => {
 bot.on(/^pls song/i, (msg) => {
   console.log(msg.from.first_name + " listened to amazing songs");
   return bot.sendDocument(msg.chat.id, "files/High ground.mp3");
+});
+bot.on(/^pls jedi/i, (msg) => {
+  console.log(msg.from.first_name + " is following the Code of the Jedi");
+  return bot.sendMessage(msg.chat.id, "There is no emotion, there is peace. There is no ignorance, there is knowledge. There is no passion, there is serenity. There is no chaos, there is harmony. There is no death, there is the Force.");
 });
 
 var timer1 = setInterval(newgame, 1000);
