@@ -4,23 +4,31 @@ const bot = new TeleBot({
     token: '607347702:AAFz1UiqPLLFUs5z0HMT7jVklLLpKVwX44E' // Telegram Bot API token.
 });
 
-var memeArray = ["files/shrek.jpeg", "files/Anime.png", "https://i.redd.it/36s0aafny9a11.png", "files/f9a.jpg", "files/Hitler.jpeg", "files/Donald Trump.jpg", "files/EArth.jpeg", "files/HP.jpeg"]
-var prequelArray = ["files/pokemon.jpeg", "files/lesboek.png", "files/Roses are red.jpeg", "files/Jesus.jpeg", "files/Kamino doesn't exist.png", "files/didju.png", "files/Precision is not accuracy.png", "files/Anakin game.jpeg", "files/Didju.jpeg", "files/We are the senate.png"]
+var memeArray = ["files/shrek.jpeg", "files/Anime.png", "https://i.redd.it/36s0aafny9a11.png", "files/f9a.jpg", "files/Hitler.jpeg", "files/Donald Trump.jpg", "files/EArth.jpeg", "files/HP.jpeg", "files/mods.jpg", ]
+var prequelArray = ["files/pokemon.jpeg", "files/lesboek.png", "files/Roses are red.jpeg", "files/Jesus.jpeg", "files/Kamino doesn't exist.png", "files/didju.png", "files/Precision is not accuracy.png", "files/Anakin game.jpeg", "files/Didju.jpeg", "files/We are the senate.png", "files/training.jpg"]
 var randomMeme = memeArray[Math.floor(Math.random() * memeArray.length)];
 var prequelmeme = prequelArray[Math.floor(Math.random() * prequelArray.length)];
 var quiz = 0;
 var aantal = 0;
 var vragen = [{ vraag: "What does Obi-Wan say when jumping down behind Grievous?", antw: "hello there"}, { vraag: "Complete the sentence: Another happy", antw: "landing"}, { vraag: "What is the color of Mace Windu's lightsaber?", antw: "purple"}, { vraag: "What is the main character of the game Knights of the Old Republic(KOTOR)?", antw: "revan"}, { vraag: "What class of droid is HK-47?", antw: "assassin droid"}, { vraag: "What does Obi-Wan get to defeat Anakin/Darth Vader?", antw: "the high ground"}, { vraag: "What rank does Rex have?", antw: "captain"}, { vraag: "Who was the leader of the trade federation?", antw: "nute gunray"}, { vraag: "What is the name of Anakin's apprentice?", antw: "ahsoka tano"}, { vraag: "who was Palpatine's Sith Master?", antw: "darth plagueis"}, { vraag: "Where were the Clone troopers created?", antw: "kamino"}, { vraag: "What was the species of Darth Maul?", antw: "zabrak"}, { vraag: "The Sith Code: Peace is a lie, there is only...", antw: "passion"}, { vraag: "The Jedi Code: There is no emotion, there is...", antw: "peace"}, { vraag: "Who rules the Sith Empire when KOTOR starts?", antw: "darth malak"}]
 
-var players = [{speler: "586275943", punten: "0"}, {speler: "586475943", punten: "0"}, {speler: "586275443", punten: "0"}]
+var scores = []
 
 var opgave = vragen[aantal];
 
-//
-// {
-//   speler: id,
-//   score: getal
-// }
+function geefPunt(speler){
+    spelerScore = scores.find(function (score) { return score.id == speler.id;});
+    if (spelerScore) {
+      spelerScore.score++;
+    }
+    else {
+      spelerScore = {};
+      spelerScore.id = speler.id;
+      spelerScore.naam = speler.first_name;
+      spelerScore.score = 1;
+      scores.push(spelerScore);
+    }
+}
 
 function newgame() {
   if (quiz == true) {
@@ -40,10 +48,8 @@ bot.on(/(.*)/, (msg, props) => {
       console.log(msg.from.first_name + " gave the right answer");
       aantal += 1;
       opgave = vragen[aantal];
-      if (msg.from.id in players.speler) {
-        console.log("yes")
-      }
-      return bot.sendMessage(msg.chat.id, "Well done, " + msg.from.first_name + " now has " + "<punten>" + " points"), bot.sendMessage(msg.chat.id, opgave.vraag);
+      geefPunt(msg.from);
+      return bot.sendMessage(msg.chat.id, "Statement: Well done, " + spelerScore.naam + " now has " + spelerScore.score + " points"), bot.sendMessage(msg.chat.id, opgave.vraag);
     }
   }
   else if (message.toLowerCase() == "hello there"){
@@ -60,15 +66,7 @@ bot.on(/(.*)/, (msg, props) => {
 
 
 
-
-
-
-
-
-
-
-
-
+//Douwe
 
 
 
