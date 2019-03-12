@@ -13,7 +13,7 @@ var quiz = 0;
 var aantal = 0;
 var sw = 0;
 //the questions for the SW quiz
-var vragen = [{ vraag: "What does Obi-Wan say when jumping down behind Grievous?", antw: "hello there"}, { vraag: "Complete the sentence: Another happy", antw: "landing"}, { vraag: "What is the color of Mace Windu's lightsaber?", antw: "purple"}, { vraag: "What is the main character of the game Knights of the Old Republic(KOTOR)?", antw: "revan"}, { vraag: "What was the name of Qui-Gon's master?", antw: "dooku"}, { vraag: "What does Obi-Wan get to defeat Anakin/Darth Vader?", antw: "the high ground"}, { vraag: "What rank does Rex have?", antw: "captain"}, { vraag: "Who was the leader of the trade federation?", antw: "nute gunray"}, { vraag: "What is the name of Anakin's apprentice?", antw: "ahsoka tano"}, { vraag: "who was Palpatine's Sith Master?", antw: "darth plagueis"}, { vraag: "Where were the Clone troopers created?", antw: "kamino"}, { vraag: "What was the species of Darth Maul?", antw: "zabrak"}, { vraag: "The Sith Code: Peace is a lie, there is only...", antw: "passion"}, { vraag: "The Jedi Code: There is no emotion, there is...", antw: "peace"}, { vraag: "Who rules the Sith Empire when KOTOR starts?", antw: "darth malak"}, { vraag: "What is the people that 'follow the ways of Revan' in SWTOR?", antw: "revanites"}];
+var vragen = [{ vraag: "What does Obi-Wan say when jumping down behind Grievous?", antw: "hello there"}, { vraag: "Complete the sentence: Another happy", antw: "landing"}, { vraag: "What is the color of Mace Windu's lightsaber?", antw: "purple"}, { vraag: "What is the main character of the game Knights of the Old Republic(KOTOR)?", antw: "revan"}, { vraag: "What was the name of Qui-Gon's master?", antw: "dooku"}, { vraag: "What does Obi-Wan get to defeat Anakin/Darth Vader?", antw: "the high ground"}, { vraag: "What rank does Rex have?", antw: "captain"}, { vraag: "Who was the leader of the trade federation?", antw: "nute gunray"}, { vraag: "What is the name of Anakin's apprentice?", antw: "ahsoka tano"}, { vraag: "who was Palpatine's Sith Master?", antw: "darth plagueis"}, { vraag: "Where were the Clone troopers created?", antw: "kamino"}, { vraag: "What was the species of Darth Maul?", antw: "zabrak"}, { vraag: "The Sith Code: Peace is a lie, there is only...", antw: "passion"}, { vraag: "The Jedi Code: There is no emotion, there is...", antw: "peace"}, { vraag: "Who rules the Sith Empire when KOTOR starts?", antw: "darth malak"}, { vraag: "What is the people that 'follow the ways of Revan' in SWTOR?", antw: "revanites"}, { vraag: "Who was the Jedi Grandmaster in SWTOR?", antw: "satele shan"}];
 //the score for each person
 var scores = [];
 //load question 1
@@ -57,7 +57,7 @@ bot.on(/(.*)/, (msg, props) => {
   console.log(msg.chat.title + ": " + msg.from.first_name + " says: " + msg.text);
   message = msg.text;
   if (sw == true){ //if quiz started
-    if (aantal == 15) {
+    if (aantal == 16) {
       endQuiz();
       return bot.sendMessage(msg.chat.id, "Well done! This is the end of the quiz, now you can try again or use other commands!");
     }
