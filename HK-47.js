@@ -13,7 +13,7 @@ var quiz = 0;
 var aantal = 0;
 var sw = 0;
 //the questions for the SW quiz
-var vragen = [{ vraag: "What does Obi-Wan say when jumping down behind Grievous?", antw: "hello there"}, { vraag: "Complete the sentence: Another happy", antw: "landing"}, { vraag: "What is the color of Mace Windu's lightsaber?", antw: "purple"}, { vraag: "What is the main character of the game Knights of the Old Republic(KOTOR)?", antw: "revan"}, { vraag: "What was the name of Qui-Gon's master?", antw: "dooku"}, { vraag: "What does Obi-Wan get to defeat Anakin/Darth Vader?", antw: "the high ground"}, { vraag: "What rank does Rex have?", antw: "captain"}, { vraag: "Who was the leader of the trade federation?", antw: "nute gunray"}, { vraag: "What is the name of Anakin's apprentice?", antw: "ahsoka tano"}, { vraag: "who was Palpatine's Sith Master?", antw: "darth plagueis"}, { vraag: "Where were the Clone troopers created?", antw: "kamino"}, { vraag: "What was the species of Darth Maul?", antw: "zabrak"}, { vraag: "The Sith Code: Peace is a lie, there is only...", antw: "passion"}, { vraag: "The Jedi Code: There is no emotion, there is...", antw: "peace"}, { vraag: "Who rules the Sith Empire when KOTOR starts?", antw: "darth malak"}];
+var vragen = [{ vraag: "What does Obi-Wan say when jumping down behind Grievous?", antw: "hello there"}, { vraag: "Complete the sentence: Another happy", antw: "landing"}, { vraag: "What is the color of Mace Windu's lightsaber?", antw: "purple"}, { vraag: "What is the main character of the game Knights of the Old Republic(KOTOR)?", antw: "revan"}, { vraag: "What was the name of Qui-Gon's master?", antw: "dooku"}, { vraag: "What does Obi-Wan get to defeat Anakin/Darth Vader?", antw: "the high ground"}, { vraag: "What rank does Rex have?", antw: "captain"}, { vraag: "Who was the leader of the trade federation?", antw: "nute gunray"}, { vraag: "What is the name of Anakin's apprentice?", antw: "ahsoka tano"}, { vraag: "who was Palpatine's Sith Master?", antw: "darth plagueis"}, { vraag: "Where were the Clone troopers created?", antw: "kamino"}, { vraag: "What was the species of Darth Maul?", antw: "zabrak"}, { vraag: "The Sith Code: Peace is a lie, there is only...", antw: "passion"}, { vraag: "The Jedi Code: There is no emotion, there is...", antw: "peace"}, { vraag: "Who rules the Sith Empire when KOTOR starts?", antw: "darth malak"}, { vraag: "What is the people that 'follow the ways of Revan' in SWTOR?", antw: "revanites"}];
 //the score for each person
 var scores = [];
 //load question 1
@@ -57,7 +57,7 @@ bot.on(/(.*)/, (msg, props) => {
   console.log(msg.chat.title + ": " + msg.from.first_name + " says: " + msg.text);
   message = msg.text;
   if (sw == true){ //if quiz started
-    if (aantal == 14) {
+    if (aantal == 15) {
       endQuiz();
       return bot.sendMessage(msg.chat.id, "Well done! This is the end of the quiz, now you can try again or use other commands!");
     }
@@ -117,48 +117,48 @@ bot.on('/start', function (msg) {
 });
 bot.on('/help', function (msg) {
   console.log(msg.from.first_name + " asked for assistance from the Jedi Council");
-  return bot.sendMessage(msg.chat.id, "Commands: meme, prequel, logo, song, info, sith, jedi, quiz and news. My prefix is pls.");
+  return bot.sendMessage(msg.chat.id, "Commands: meme, prequel, logo, song, info, sith, jedi, quiz and news. Use 'HK' before the command to active the bot.");
 });
-bot.on(/^pls help/i, function (msg) {
+bot.on(/^hk help/i, function (msg) {
   console.log(msg.from.first_name + " asked for assistance from the Jedi Council");
-  return bot.sendMessage(msg.chat.id, "Commands: meme, prequel, logo, song, info, sith, jedi, quiz and news. My prefix is pls.");
+  return bot.sendMessage(msg.chat.id, "Commands: meme, prequel, logo, song, info, sith, jedi, quiz and news. Use 'HK' before the command to active the bot.");
 });
-bot.on(/^pls info/i, function (msg) {
+bot.on(/^hk info/i, function (msg) {
   console.log(msg.from.first_name + " got some info");
   return bot.sendMessage(msg.chat.id, "The bot still is Work in Progress, it will be finished soon. I am just a simple man trying to make my way into the universe.");
 });
-bot.on(/^pls meme/i, (msg) => {
+bot.on(/^hk meme/i, (msg) => {
   console.log(msg.from.first_name + " dealed illegally in memes");
   randomMeme = memeArray[Math.floor(Math.random() * memeArray.length)];
   return bot.sendPhoto(msg.chat.id, randomMeme);
 });
-bot.on(/^pls prequel/i, (msg) => {
+bot.on(/^hk prequel/i, (msg) => {
   console.log(msg.from.first_name + " obtained the high ground");
   prequelmeme = prequelArray[Math.floor(Math.random() * prequelArray.length)];
   return bot.sendPhoto(msg.chat.id, prequelmeme);
 });
-bot.on(/^pls logo/i, (msg) => {
+bot.on(/^hk logo/i, (msg) => {
   console.log(msg.from.first_name + " saw EA's true nature");
   return bot.sendDocument(msg.chat.id, "files/EA.mp4");
 });
-bot.on(/^pls quiz/i, (msg) => {
+bot.on(/^hk quiz/i, (msg) => {
   quiz = true;
   bot.sendMessage(msg.chat.id, "Choose a question list, options: Star Wars")
   return bot.sendMessage(msg.chat.id, "WARNING: some of the question lists can contain spoilers for movies, games, TV-shows or books");
 });
-bot.on(/^pls sith/i, (msg) => {
+bot.on(/^hk sith/i, (msg) => {
   console.log(msg.from.first_name + " is following the Code of the Sith");
   return bot.sendMessage(msg.chat.id, "Peace is a lie. There is only Passion. Through Passion I gain Strength. Through Strength I gain Power. Through Power I gain Victory. Through Victory my chains are broken. The Force shall free me.");
 });
-bot.on(/^pls news/i, (msg) => {
+bot.on(/^hk news/i, (msg) => {
   console.log(msg.from.first_name + " watched the holonet");
   return bot.sendMessage(msg.chat.id, "Russische trollen hadden Star Wars gebruikt om verdeeldheid te zaaien."), bot.sendPhoto(msg.chat.id, "https://cdn.discordapp.com/attachments/431768616833122305/502788066700689408/done.png"), bot.sendMessage(msg.chat.id, "Special thanks to Douwe Raat for making the picture");
 });
-bot.on(/^pls song/i, (msg) => {
+bot.on(/^hk song/i, (msg) => {
   console.log(msg.from.first_name + " listened to amazing songs");
   return bot.sendDocument(msg.chat.id, "files/High ground.mp3");
 });
-bot.on(/^pls jedi/i, (msg) => {
+bot.on(/^hk jedi/i, (msg) => {
   console.log(msg.from.first_name + " is following the Code of the Jedi");
   return bot.sendMessage(msg.chat.id, "There is no emotion, there is peace. There is no ignorance, there is knowledge. There is no passion, there is serenity. There is no chaos, there is harmony. There is no death, there is the Force.");
 });
