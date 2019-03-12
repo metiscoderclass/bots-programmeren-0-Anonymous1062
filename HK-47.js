@@ -87,7 +87,7 @@ bot.on(/(.*)/, (msg, props) => {
     console.log(msg.from.first_name + " engaged General Grievous");
     return bot.sendMessage(msg.chat.id, "General Kenobi");
   }
-})
+});
 
 
 
