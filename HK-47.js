@@ -117,15 +117,15 @@ bot.on('/start', function (msg) {
 });
 bot.on('/help', function (msg) {
   console.log(msg.from.first_name + " asked for assistance from the Jedi Council");
-  return bot.sendMessage(msg.chat.id, "Commands: meme, prequel, logo, song, info, sith, jedi, quiz and news. Use 'HK' before the command to active the bot.");
+  return bot.sendMessage(msg.chat.id, "Commands: meme, prequel, logo, song, info, sith, jedi, quiz and news. Use 'HK' before the command to active the bot."), bot.sendMessage(msg.chat.id, "Sub to Pewdiepie");
 });
 bot.on(/^hk help/i, function (msg) {
   console.log(msg.from.first_name + " asked for assistance from the Jedi Council");
-  return bot.sendMessage(msg.chat.id, "Commands: meme, prequel, logo, song, info, sith, jedi, quiz and news. Use 'HK' before the command to active the bot.");
+  return bot.sendMessage(msg.chat.id, "Commands: meme, prequel, logo, song, info, sith, jedi, quiz and news. Use 'HK' before the command to active the bot."), bot.sendMessage(msg.chat.id, "Sub to Pewdiepie");
 });
 bot.on(/^hk info/i, function (msg) {
   console.log(msg.from.first_name + " got some info");
-  return bot.sendMessage(msg.chat.id, "The bot still is Work in Progress, it will be finished soon. I am just a simple man trying to make my way into the universe.");
+  return bot.sendMessage(msg.chat.id, "The bot isn't completely finished, I'll update it whenever I feel like. Don't be angry about that, I am just a simple man trying to make my way into the universe.");
 });
 bot.on(/^hk meme/i, (msg) => {
   console.log(msg.from.first_name + " dealed illegally in memes");
